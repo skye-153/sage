@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-home",
+      "description": "Students walking on a university campus",
+      "imageUrl": "https://images.unsplash.com/photo-1576495199011-eb94736d05d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwY2FtcHVzfGVufDB8fHx8MTc2ODI0MTI1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university campus"
+    },
+    {
+      "id": "uni-header-1",
+      "description": "Modern university library interior",
+      "imageUrl": "https://images.unsplash.com/photo-1564910443496-5fd2d76b47fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1bml2ZXJzaXR5JTIwbGlicmFyeXxlbnwwfHx8fDE3NjgyODQwNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university library"
+    },
+    {
+      "id": "uni-header-2",
+      "description": "Classic university building facade",
+      "imageUrl": "https://images.unsplash.com/photo-1604136514790-b27086f6c36e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx1bml2ZXJzaXR5JTIwYnVpbGRpbmd8ZW58MHx8fHwxNzY4Mjc2MTE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university building"
+    },
+    {
+      "id": "uni-header-3",
+      "description": "Students collaborating in a study group",
+      "imageUrl": "https://images.unsplash.com/photo-1721702754494-fdd7189f946c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdHVkZW50cyUyMHN0dWR5aW5nfGVufDB8fHx8MTc2ODIzNDg5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students studying"
+    },
+    {
+      "id": "uni-header-4",
+      "description": "Aerial view of a university campus",
+      "imageUrl": "https://images.unsplash.com/photo-1629340209850-91da481357bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dW5pdmVyc2l0eSUyMGFlcmlhbHxlbnwwfHx8fDE3NjgzMDk1OTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university aerial"
+    },
+    {
+      "id": "uni-header-5",
+      "description": "Student in a graduation cap and gown",
+      "imageUrl": "https://images.unsplash.com/photo-1594686900103-3c9698dbb31b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwZ3JhZHVhdGlvbnxlbnwwfHx8fDE3NjgyMTM2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "student graduation"
+    },
+    {
+      "id": "login-bg",
+      "description": "Architectural detail of a university building",
+      "imageUrl": "https://images.unsplash.com/photo-1651305052443-07cbee17b51e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx1bml2ZXJzaXR5JTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2ODMwOTU5NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university architecture"
+    }
+  ]
 }
