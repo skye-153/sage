@@ -23,12 +23,17 @@ function initializeFirebase() {
     if (typeof window !== 'undefined') {
         if (getApps().length === 0) {
             const firebaseConfig = getFirebaseConfig();
-            app = initializeApp(firebaseConfig);
+            if (firebaseConfig.apiKey) {
+              app = initializeApp(firebaseConfig);
+            }
         } else {
             app = getApp();
         }
-        auth = getAuth(app);
-        db = getFirestore(app);
+
+        if (app) {
+          auth = getAuth(app);
+          db = getFirestore(app);
+        }
     }
 }
 
