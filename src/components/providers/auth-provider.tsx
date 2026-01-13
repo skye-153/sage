@@ -2,8 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase/config';
+import { auth, initializeFirebase } from '@/lib/firebase/config';
 import { AuthContext } from '@/hooks/use-auth';
+
+// Initialize Firebase on the client-side
+if (typeof window !== 'undefined') {
+  initializeFirebase();
+}
 
 type AuthProviderProps = {
   children: React.ReactNode;
