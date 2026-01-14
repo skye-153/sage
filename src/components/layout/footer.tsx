@@ -22,14 +22,14 @@ export default function Footer() {
             <Link href="/admin" className="hover:text-primary transition-colors">Admin Login</Link>
           </div>
           <div className="grid gap-4">
-             <h3 className="font-semibold font-headline tracking-wider uppercase">Contact Us</h3>
-             <p className="text-muted-foreground">Have questions? Reach out to us.</p>
-             <a href="mailto:contact@sage.edu" className="font-medium hover:text-primary transition-colors">contact@sage.edu</a>
-             <div className="flex space-x-4 mt-2">
-                <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter /></Link>
-                <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin /></Link>
-                <Link href="#" className="text-muted-foreground hover:text-primary"><Facebook /></Link>
-             </div>
+            <h3 className="font-semibold font-headline tracking-wider uppercase">Contact Us</h3>
+            <p className="text-muted-foreground">Have questions? Reach out to us.</p>
+            <a href="mailto:contact@sage.edu" className="font-medium hover:text-primary transition-colors">contact@sage.edu</a>
+            <div className="flex space-x-4 mt-2">
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Facebook /></Link>
+            </div>
           </div>
         </div>
         <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">

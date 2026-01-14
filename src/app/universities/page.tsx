@@ -1,40 +1,42 @@
-import { getUniversities } from "@/lib/firebase/firestore";
-import UniversitiesTable from "@/components/universities/universities-table";
-import MainLayout from "@/components/layout/main-layout";
-import { University } from "@/lib/types";
+'use client';
 
-// Helper to determine and order table headers
-const getTableHeaders = (universities: University[]): string[] => {
-  if (universities.length === 0) return [];
+import { useState, useEffect } from 'react';
+import MainLayout from '@/components/layout/main-layout';
+import UniversitiesTable from '@/components/universities/universities-table';
+import { getUniversities } from '@/lib/localStorage';
+import type { University } from '@/lib/types';
 
-  const allKeys = new Set<string>();
-  universities.forEach(uni => {
-    Object.keys(uni).forEach(key => allKeys.add(key));
-  });
+export default function UniversitiesPage() {
+  const [universities, setUniversities] = useState<University[]>([]);
+  const [headers, setHeaders] = useState<string[]>([]);
 
-  // Define a preferred order for common columns
-  const preferredOrder = ['name', 'Country', 'City', 'QS Ranking', 'Public/Private', 'Acceptance Rate', 'Tuition Fees (USD)'];
-  const nonTableKeys = new Set(['id', 'details', 'headerImage']);
+  useEffect(() => {
+    const data = getUniversities();
+    setUniversities(data);
 
-  const headers = Array.from(allKeys).filter(key => !nonTableKeys.has(key));
+    // Extract all unique column names and order them
+    if (data.length > 0) {
+      const allKeys = new Set<string>();
+      data.forEach(uni => {
+        Object.keys(uni).forEach(key => allKeys.add(key));
+      });
 
-  // Sort headers: preferred ones first, then alphabetically
-  headers.sort((a, b) => {
-    const indexA = preferredOrder.indexOf(a);
-    const indexB = preferredOrder.indexOf(b);
-    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-    if (indexA !== -1) return -1;
-    if (indexB !== -1) return 1;
-    return a.localeCompare(b);
-  });
-  
-  return headers;
-};
+      const preferredOrder = ['name', 'Country', 'City', 'QS Ranking', 'Public/Private', 'Acceptance Rate', 'Tuition Fees (USD)'];
+      const nonTableKeys = new Set(['id', 'details', 'headerImage', 'knowMore']);
 
+      const filteredKeys = Array.from(allKeys).filter(key => !nonTableKeys.has(key));
+      filteredKeys.sort((a, b) => {
+        const indexA = preferredOrder.indexOf(a);
+        const indexB = preferredOrder.indexOf(b);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.localeCompare(b);
+      });
 
-export default async function UniversitiesPage() {
-  const universities = await getUniversities();
-  const headers = getTableHeaders(universities);
+      setHeaders(filteredKeys);
+    }
+  }, []);
 
   return (
     <MainLayout>
@@ -47,8 +49,9 @@ export default async function UniversitiesPage() {
             Browse our curated list of international universities. Click on a university's name for more details.
           </p>
         </div>
-        <UniversitiesTable universities={universities} headers={headers} />
+        <UniversitiesTable universities={universities} headers={headers} basePath="/universities" />
       </div>
     </MainLayout>
   );
 }
+

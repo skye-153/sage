@@ -25,13 +25,14 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { University } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
-import { addUniversity, updateUniversity } from '@/lib/firebase/firestore';
+import { saveUniversity } from '@/lib/localStorage';
 import { Loader2, PlusCircle, Trash2 } from 'lucide-react';
 
 const formSchema = z.object({
     name: z.string().min(1, 'Name is required'),
     headerImage: z.string().url('Must be a valid URL'),
     details: z.string().min(1, 'Details are required'),
+    knowMore: z.string().optional(),
     dynamicFields: z.array(z.object({
         key: z.string().min(1, 'Key is required'),
         value: z.string().min(1, 'Value is required'),
@@ -59,7 +60,7 @@ export default function EditUniversityDialog({
 
   const defaultDynamicFields = university ? 
     Object.entries(university)
-      .filter(([key]) => !['id', 'name', 'headerImage', 'details'].includes(key))
+      .filter(([key]) => !['id', 'name', 'headerImage', 'details', 'knowMore'].includes(key))
       .map(([key, value]) => ({ key, value: String(value) }))
     : [];
   
@@ -69,6 +70,7 @@ export default function EditUniversityDialog({
       name: '',
       headerImage: '',
       details: '',
+      knowMore: '',
       dynamicFields: [],
     },
   });
@@ -84,6 +86,7 @@ export default function EditUniversityDialog({
         name: university.name,
         headerImage: university.headerImage,
         details: university.details,
+        knowMore: university.knowMore || '',
         dynamicFields: defaultDynamicFields
       });
     } else {
@@ -91,12 +94,13 @@ export default function EditUniversityDialog({
         name: '',
         headerImage: 'https://picsum.photos/seed/10/1600/600',
         details: '<h1>New University</h1><p>Add details here.</p>',
+        knowMore: '',
         dynamicFields: [],
       });
     }
   }, [university, form, defaultDynamicFields]);
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
     const dynamicData = values.dynamicFields.reduce((acc, { key, value }) => {
@@ -104,27 +108,19 @@ export default function EditUniversityDialog({
         return acc;
     }, {} as Record<string, string>);
 
-    const universityData = {
+    const universityData: University = {
+        id: isEditMode && university ? university.id : Date.now().toString(),
         name: values.name,
         headerImage: values.headerImage,
         details: values.details,
+        knowMore: values.knowMore,
         ...dynamicData,
     };
 
     try {
-        if (isEditMode && university) {
-            const success = await updateUniversity(university.id, universityData);
-            if(success) {
-                onUniversityUpdated({ ...university, ...universityData });
-                toast({ title: 'Success', description: 'University updated successfully.' });
-            } else throw new Error("Update failed");
-        } else {
-            const newId = await addUniversity(universityData);
-            if(newId) {
-                onUniversityUpdated({ id: newId, ...universityData });
-                toast({ title: 'Success', description: 'University added successfully.' });
-            } else throw new Error("Add failed");
-        }
+        saveUniversity(universityData);
+        onUniversityUpdated(universityData);
+        toast({ title: 'Success', description: `University ${isEditMode ? 'updated' : 'added'} successfully.` });
         setIsOpen(false);
     } catch (error) {
         toast({ variant: 'destructive', title: 'Error', description: `Failed to ${isEditMode ? 'update' : 'add'} university.` });
@@ -151,7 +147,10 @@ export default function EditUniversityDialog({
                 <FormItem><FormLabel>Header Image URL</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
             )}/>
             <FormField control={form.control} name="details" render={({ field }) => (
-                <FormItem><FormLabel>Details (HTML)</FormLabel><FormControl><Textarea {...field} rows={10} /></FormControl><FormMessage /></FormItem>
+                <FormItem><FormLabel>Details (HTML)</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>
+            )}/>
+            <FormField control={form.control} name="knowMore" render={({ field }) => (
+                <FormItem><FormLabel>Know More (Optional HTML)</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>
             )}/>
             
             <div className="space-y-2">

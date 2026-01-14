@@ -1,13 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { initializeFirebase, auth } from '@/lib/firebase/config';
 import { AuthContext } from '@/hooks/use-auth';
+import { initializeStorage } from '@/lib/localStorage';
 
 
 type AuthProviderProps = {
   children: React.ReactNode;
+};
+
+type User = {
+  id: string;
+  email: string;
+  isAdmin: boolean;
 };
 
 export default function AuthProvider({ children }: AuthProviderProps) {
@@ -15,17 +20,13 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    initializeFirebase();
-    if (!auth) {
-      setLoading(false);
-      return;
-    }
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+    // Initialize localStorage on client side
+    initializeStorage();
+    
+    // All users are considered "logged in" for this app
+    // since there's no backend authentication
+    setUser(null);
+    setLoading(false);
   }, []);
 
   return (

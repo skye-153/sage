@@ -22,8 +22,8 @@ export default function LoginPage() {
             </p>
           </div>
           <LoginForm />
-          <div className="mt-4 text-center text-sm">
-            Access is restricted to authorized personnel.
+          <div className="mt-4 text-center text-sm text-muted-foreground">
+            Click "Access Admin Panel" to manage all website content.
           </div>
         </div>
       </div>

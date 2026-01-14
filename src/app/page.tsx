@@ -40,14 +40,16 @@ export default function Home() {
       <div className="flex flex-col">
         <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center text-center text-white">
           <div className="absolute inset-0 bg-black/50 z-10" />
-           {heroImage && <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            data-ai-hint={heroImage.imageHint}
-            fill
-            className="object-cover"
-            priority
-          />}
+          {heroImage && (
+            <Image
+              src={heroImage.imageUrl}
+              alt={heroImage.description}
+              data-ai-hint={heroImage.imageHint}
+              fill
+              className="object-cover"
+              priority
+            />
+          )}
           <div className="relative z-20 container px-4 md:px-6">
             <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight">
               SAGE Explorer
@@ -92,11 +94,11 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex items-center justify-center">
-                  <div className="p-4 bg-primary/10 rounded-full">
-                    <div className="p-8 bg-primary/20 rounded-full">
-                        <BookOpen className="size-24 text-primary" />
-                    </div>
+                <div className="p-4 bg-primary/10 rounded-full">
+                  <div className="p-8 bg-primary/20 rounded-full">
+                    <BookOpen className="size-24 text-primary" />
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -124,7 +126,7 @@ export default function Home() {
                   <CardContent>
                     <p className="text-muted-foreground">{feature.description}</p>
                     <Button variant="link" asChild className="mt-4 text-primary">
-                        <Link href={feature.link}>Learn More <ArrowRight className="ml-2 size-4" /></Link>
+                      <Link href={feature.link}>Learn More <ArrowRight className="ml-2 size-4" /></Link>
                     </Button>
                   </CardContent>
                 </Card>

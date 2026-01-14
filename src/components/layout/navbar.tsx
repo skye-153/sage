@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
 
 const navLinks = [
   { href: '/universities', label: 'Universities' },
@@ -20,7 +19,6 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === '/') {
@@ -59,19 +57,6 @@ export default function Navbar() {
       >
         Contact Us
       </Link>
-      {user && (
-        <Link
-          href="/admin"
-          className={cn(
-            'font-medium transition-colors hover:text-primary',
-            pathname === '/admin' ? 'text-primary' : 'text-foreground/80',
-             isMobile && 'block w-full p-4 text-lg'
-          )}
-          onClick={() => isMobile && setIsMobileMenuOpen(false)}
-        >
-          Admin
-        </Link>
-      )}
     </>
   );
 
@@ -83,9 +68,9 @@ export default function Navbar() {
           <span className="font-bold font-headline text-lg">SAGE Explorer</span>
         </Link>
         <nav className="hidden flex-1 items-center gap-6 text-sm md:flex">
-            <div className="flex-1 flex justify-end gap-6">
-                 <NavLinkItems />
-            </div>
+          <div className="flex-1 flex justify-end gap-6">
+            <NavLinkItems />
+          </div>
         </nav>
         <div className="flex flex-1 items-center justify-end md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>

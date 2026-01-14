@@ -59,3 +59,88 @@ export const mockUniversities: University[] = [
     City: 'Toronto',
   },
 ];
+
+export const mockScholarships = [
+  {
+    id: 's1',
+    name: 'Fulbright Scholarship',
+    'Organization': 'US State Department',
+    'Award Amount': '$50,000 - $100,000',
+    'Deadline': 'October 2025',
+    details: 'Study abroad opportunities in the USA',
+    knowMore: '<h2>Fulbright Scholarship Details</h2><p>The Fulbright Program is the flagship international exchange program sponsored by the US State Department. It provides grants for master\'s degree study.</p><h3>Eligibility</h3><ul><li>Bachelor\'s degree completed</li><li>English proficiency</li><li>Strong academic record</li></ul>'
+  },
+  {
+    id: 's2',
+    name: 'DAAD Scholarships',
+    'Organization': 'German Academic Exchange Service',
+    'Award Amount': '€934/month',
+    'Deadline': 'December 2025',
+    details: 'Study in Germany',
+    knowMore: '<h2>DAAD Scholarships</h2><p>DAAD offers scholarships for postgraduate study in Germany. Support includes monthly allowance, health insurance, and travel costs.</p>'
+  }
+];
+
+export const mockAccommodations = [
+  {
+    id: 'a1',
+    name: 'On-Campus Dorms',
+    'University/City': 'Various Universities',
+    'Average Cost': '$300-600/month',
+    'Capacity': 'High',
+    details: 'University-provided dormitory facilities',
+    knowMore: '<h2>On-Campus Dormitories</h2><p>Most universities offer on-campus housing for students. Amenities include furnished rooms, internet, utilities, and social facilities.</p><h3>Benefits</h3><ul><li>Close to campus</li><li>Community atmosphere</li><li>All-inclusive pricing</li></ul>'
+  },
+  {
+    id: 'a2',
+    name: 'Private Apartments',
+    'University/City': 'Major Cities',
+    'Average Cost': '$600-1200/month',
+    'Capacity': 'Medium',
+    details: 'Private rental apartments',
+    knowMore: '<h2>Private Apartments</h2><p>Independent housing in urban areas. More autonomy and flexibility compared to dorms.</p>'
+  }
+];
+
+export const mockVisa = [
+  {
+    id: 'v1',
+    name: 'US Student Visa (F-1)',
+    'Country': 'USA',
+    'Processing Time': '4-6 weeks',
+    'Validity': '1 year (renewable)',
+    details: 'Visa for studying in the United States',
+    knowMore: '<h2>F-1 Student Visa Process</h2><p>The F-1 visa allows international students to study full-time at US schools.</p><h3>Requirements</h3><ul><li>I-20 from school</li><li>Valid passport</li><li>Financial proof</li><li>Interview at embassy</li></ul>'
+  },
+  {
+    id: 'v2',
+    name: 'UK Student Visa',
+    'Country': 'UK',
+    'Processing Time': '3 weeks',
+    'Validity': 'Duration of studies',
+    details: 'Visa for studying in the United Kingdom',
+    knowMore: '<h2>UK Student Visa</h2><p>The UK Student visa allows international students to study at accredited institutions.</p>'
+  }
+];
+
+export const mockFinances = [
+  {
+    id: 'f1',
+    name: 'Student Loans',
+    'Type': 'Loans',
+    'Interest Rate': '4-8%',
+    'Repayment Period': '10-25 years',
+    details: 'Government and private student loans',
+    knowMore: '<h2>Student Loan Options</h2><p>Various loan options are available for international students with competitive interest rates.</p><h3>Types</h3><ul><li>Federal loans</li><li>Private loans</li><li>UK government loans</li></ul>'
+  },
+  {
+    id: 'f2',
+    name: 'Part-time Work',
+    'Type': 'Income',
+    'Earning Potential': '$15-25/hour',
+    'Hours Allowed': '20 hours/week (term)',
+    details: 'Part-time employment while studying',
+    knowMore: '<h2>Part-time Work While Studying</h2><p>Many countries allow international students to work part-time on campus and off-campus.</p>'
+  }
+];
+

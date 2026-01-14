@@ -10,19 +10,29 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
-import type { University } from '@/lib/types';
-import { Badge } from '../ui/badge';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
-type UniversitiesTableProps = {
-  universities: University[];
+type DataTableProps = {
+  universities?: any[];
+  items?: any[];
   headers: string[];
+  basePath?: string;
 };
 
-export default function UniversitiesTable({ universities, headers }: UniversitiesTableProps) {
+export default function DataTable({ 
+  universities, 
+  items, 
+  headers, 
+  basePath = '/universities' 
+}: DataTableProps) {
+  const rows = items || universities || [];
+
   const formatHeader = (header: string) => {
     return header
       .replace(/([A-Z])/g, ' $1')
-      .replace(/^./, (str) => str.toUpperCase());
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim();
   };
 
   return (
@@ -36,31 +46,42 @@ export default function UniversitiesTable({ universities, headers }: Universitie
                   {formatHeader(header)}
                 </TableHead>
               ))}
+              <TableHead className="font-bold">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {universities.length > 0 ? (
-              universities.map((uni) => (
-                <TableRow key={uni.id}>
+            {rows.length > 0 ? (
+              rows.map((item) => (
+                <TableRow key={item.id}>
                   {headers.map((header) => (
-                    <TableCell key={`${uni.id}-${header}`}>
+                    <TableCell key={`${item.id}-${header}`}>
                       {header === 'name' ? (
-                        <Link href={`/universities/${uni.id}`} className="font-medium text-primary hover:underline">
-                          {uni[header]}
+                        <Link 
+                          href={`${basePath}/${item.id}`} 
+                          className="font-medium text-primary hover:underline"
+                        >
+                          {item[header]}
                         </Link>
                       ) : header.toLowerCase().includes('ranking') ? (
-                        <Badge variant="secondary">#{uni[header]}</Badge>
+                        <Badge variant="secondary">#{item[header]}</Badge>
                       ) : (
-                        uni[header] || 'N/A'
+                        item[header] || 'N/A'
                       )}
                     </TableCell>
                   ))}
+                  <TableCell>
+                    <Button asChild size="sm" variant="outline">
+                      <Link href={`${basePath}/${item.id}`}>
+                        Know More
+                      </Link>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={headers.length} className="h-24 text-center">
-                  No universities found.
+                <TableCell colSpan={headers.length + 1} className="h-24 text-center">
+                  No items found.
                 </TableCell>
               </TableRow>
             )}

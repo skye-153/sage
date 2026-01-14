@@ -1,10 +1,9 @@
 'use client';
 
 import { useContext, createContext } from 'react';
-import type { User } from 'firebase/auth';
 
 export type AuthContextType = {
-  user: User | null;
+  user: any | null;
   loading: boolean;
 };
 

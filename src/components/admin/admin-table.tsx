@@ -21,7 +21,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { University } from '@/lib/types';
 import EditUniversityDialog from './edit-university-dialog';
-import { signOutUser } from '@/lib/firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -35,7 +34,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '../ui/alert-dialog';
-import { deleteUniversity } from '@/lib/firebase/firestore';
+import { deleteUniversity } from '@/lib/localStorage';
 
 
 type AdminTableProps = {
@@ -51,16 +50,6 @@ export default function AdminTable({ initialUniversities, initialHeaders }: Admi
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleSignOut = async () => {
-    const result = await signOutUser();
-    if (result.success) {
-      toast({ title: "Signed Out", description: "You have been successfully signed out." });
-      router.push('/login');
-    } else {
-      toast({ variant: 'destructive', title: "Sign Out Failed", description: result.error });
-    }
-  };
-
   const handleEdit = (university: University) => {
     setSelectedUniversity(university);
     setIsEditDialogOpen(true);
@@ -71,14 +60,10 @@ export default function AdminTable({ initialUniversities, initialHeaders }: Admi
     setIsEditDialogOpen(true);
   }
 
-  const handleDelete = async (universityId: string) => {
-    const success = await deleteUniversity(universityId);
-    if (success) {
-      setUniversities(prev => prev.filter(u => u.id !== universityId));
-      toast({ title: 'Success', description: 'University deleted successfully.' });
-    } else {
-      toast({ variant: 'destructive', title: 'Error', description: 'Failed to delete university.' });
-    }
+  const handleDelete = (universityId: string) => {
+    deleteUniversity(universityId);
+    setUniversities(prev => prev.filter(u => u.id !== universityId));
+    toast({ title: 'Success', description: 'University deleted successfully.' });
   };
 
   const onUniversityUpdated = (updatedUniversity: University) => {
@@ -123,7 +108,6 @@ export default function AdminTable({ initialUniversities, initialHeaders }: Admi
           <Button onClick={handleAddNew}>
             <PlusCircle className="mr-2 h-4 w-4" /> Add University
           </Button>
-          <Button variant="outline" onClick={handleSignOut}>Sign Out</Button>
         </div>
       </div>
 
